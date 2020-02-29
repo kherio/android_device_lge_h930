@@ -15,8 +15,8 @@
 #
 
 PRODUCT_MAKEFILES += \
-    $(LOCAL_DIR)/havoc_h930.mk
+    $(LOCAL_DIR)/du_h930.mk
 
 COMMON_LUNCH_CHOICES := \
-    havoc_h930-userdebug \
-    havoc_h930-eng
+    du_h930-userdebug \
+    du_h930-eng
