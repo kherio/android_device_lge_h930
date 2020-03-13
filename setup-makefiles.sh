@@ -1,5 +1,6 @@
 #!/bin/bash
 #
+# Copyright (C) 2016 The CyanogenMod Project
 # Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,8 +18,31 @@
 
 set -e
 
-export DEVICE=h930
-export DEVICE_COMMON=joan-common
-export VENDOR=lge
+DEVICE=h930
+VENDOR=lge
 
-./../$DEVICE_COMMON/setup-makefiles.sh $@
+INITIAL_COPYRIGHT_YEAR=2018
+
+# Load extract_utils and do some sanity checks
+MY_DIR="${BASH_SOURCE%/*}"
+if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
+
+HAVOC_ROOT="$MY_DIR"/../../..
+
+HELPER="$HAVOC_ROOT"/vendor/havoc/build/tools/extract_utils.sh
+if [ ! -f "$HELPER" ]; then
+    echo "Unable to find helper script at $HELPER"
+    exit 1
+fi
+. "$HELPER"
+
+# Initialize the helper
+setup_vendor "$DEVICE" "$VENDOR" "$HAVOC_ROOT"
+
+# Copyright headers and guards
+write_headers
+
+write_makefiles "$MY_DIR"/proprietary-files.txt
+
+# Finish
+write_footers
