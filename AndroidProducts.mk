@@ -15,8 +15,8 @@
 #
 
 PRODUCT_MAKEFILES += \
-    $(LOCAL_DIR)/potato_h930.mk
+    $(LOCAL_DIR)/zenx_h930.mk
 
 COMMON_LUNCH_CHOICES := \
-    potato_h930-userdebug \
-    potato_h930-eng
+    zenx_h930-userdebug \
+    zenx_h930-eng
